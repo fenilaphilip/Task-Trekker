@@ -1,8 +1,29 @@
 <%- include('partials/header.ejs') %>
 
-<div>
-    <h1>
-        Today
-    </h1>
+<div class="box">
+  <h1>
+    Today
+  </h1>
 </div>
+<div class="box">
+  <% for( let index = 0; index < lists.length; index++ ) { %>
+  <div class="item">
+    <form>
+      <input type="checkbox">
+    </form>
+    <p>
+      <%=lists[index]  %>
+    </p>
+  </div>
+  <% } %>
+
+  <div class="item">
+    <form action="/add" method="post">
+      <input type="text" name="newTask" placeholder="New Task" autocomplete="off" autofocus="true">
+      <button type="submit">+</button>
+    </form>
+  </div>
+
+</div>
+
 <%- include('partials/footer.ejs') %>
