@@ -6,15 +6,17 @@
   </h1>
 </div>
 <div class="box">
+  <% for( let index = 0; index < lists.length; index++ ) { %>
   <div class="item">
     <form>
       <input type="checkbox">
     </form>
     <p>
-      Do grocery shopping
+      <%=lists[index]  %>
     </p>
-
   </div>
+  <% } %>
+
   <div class="item">
     <form>
       <input type="text">

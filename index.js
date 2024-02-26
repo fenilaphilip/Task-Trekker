@@ -1,5 +1,5 @@
 import express from "express";
-import bodyParser, { urlencoded } from "body-parser";
+import bodyParser from "body-parser";
 import pg from "pg";
 
 const app = express();
@@ -16,8 +16,11 @@ db.connect();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
+let tasks = ["Buy Milk", "Do homework", "Take shower"];
 app.get("/", (req, res) => {
-    res.render("index.ejs");
+    res.render("index.ejs", {
+        lists: tasks,
+    });
 });
 app.listen(port, () => {
     console.log(`Server running on port ${port}.`);
