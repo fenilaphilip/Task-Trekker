@@ -18,16 +18,23 @@ app.use(express.static("public"));
 
 app.get("/", async (req, res) => {
     const tasks = await getTaskLists();
-    console.log(`tasks : ${tasks}`)
+    // console.log(`tasks : ${tasks}`)
     res.render("index.ejs", {
         lists: tasks,
     });
 });
 
+app.post("/add", async (req, res) => {
+    const new_task = req.body.newTask;
+    // console.log(new_task);
+    await db.query("INSERT INTO items(title) VALUES($1)", [new_task]);
+    res.redirect("/");
+});
+
 async function getTaskLists() {
     let taskTray = [];
     const result = await db.query("Select title from items");
-    console.log(result.rows);
+    // console.log(result.rows);
     result.rows.forEach((task) => {
         taskTray.push(task.title);
     });
